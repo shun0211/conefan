@@ -14,6 +14,8 @@ services:
       - postgres-data:/var/lib/postgresql/data
   web:
     build: .
+    environment:
+      EDITOR: vi
     tty: true
     stdin_open: true
     # rails sした際に、A server is already running.というエラーが出ることがある。これを防ぐため、rm -f tmp/pids/server.pidしている。
