@@ -1,5 +1,5 @@
 ActiveRecord::Base.transaction do
-  User.create!(
+  user = User.create!(
     nickname: "さかい",
     email: "aaa@example.com",
     password: "password1",
@@ -8,7 +8,7 @@ ActiveRecord::Base.transaction do
     何卒、よろしくお願いします＼(^o^)／"
   )
 
-  User.create!(
+  user2 = User.create!(
     nickname: "木内",
     email: "bbb@example.com",
     password: "password1",
@@ -17,7 +17,7 @@ ActiveRecord::Base.transaction do
     よろしくお願いします😄"
   )
 
-  User.create!(
+  user3 = User.create!(
     nickname: "たろう",
     email: "ccc@example.com",
     password: "password1",
@@ -37,7 +37,7 @@ ActiveRecord::Base.transaction do
     number_of_sheets: rand(4) + 1,
     price: (rand(10)+1) * 1000,
     description: "複数チケットが当たったので、出品します。\nできればいつもRADを応援しているファンに譲りたいです。\nよろしくお願いします！！",
-    seller_id: 3
+    seller: user
   )
 
   Ticket.create!(
@@ -50,7 +50,7 @@ ActiveRecord::Base.transaction do
     number_of_sheets: rand(4) + 1,
     price: (rand(10)+1) * 1000,
     description: "友人が行けなくなったため、一緒に参戦してくれる方を募集します。\nmiwa好きの方だとうれしいです😊\nよろしくお願いします！",
-    seller_id: 2
+    seller: user2
   )
 
 
@@ -64,23 +64,23 @@ ActiveRecord::Base.transaction do
     number_of_sheets: rand(4) + 1,
     price: (rand(10)+1) * 1000,
     description: "仕事で行けなくなりました。無念です。\nどなたか代わりに楽しんでください。\nチケットは最初に購入希望してくださった方にお譲りします。",
-    seller_id: 1
+    seller: user
   )
 
-  Room.create!
+  room = Room.create!
   Entry.create!(
-    user_id: 1,
-    room_id: 1
+    user_id: user,
+    room: room
   )
   Entry.create!(
-    user_id: 2,
-    room_id: 1
+    user: user2,
+    room: room
   )
   100.times do |n|
     Message.create!(
-      user_id: 2,
-      room_id: 1,
-      content: "Hello, World"
+      user: user2,
+      room: room,
+      content: "Hello, World #{n}回目"
     )
   end
 end
