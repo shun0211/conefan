@@ -69,7 +69,7 @@ ActiveRecord::Base.transaction do
 
   room = Room.create!
   Entry.create!(
-    user_id: user,
+    user: user,
     room: room
   )
   Entry.create!(
