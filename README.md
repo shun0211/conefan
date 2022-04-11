@@ -6,7 +6,7 @@ README.md
 行けなくなった音楽ライブやフェスのチケットをそのライブへ行きたい人に向けて譲ることができるサービスです。
 
 ## URL
-https://conefan.com
+https://conefan.herokuapp.com/
 
 【かんたんログイン】ボタンからゲストユーザーとしてログインできます。
 
@@ -91,3 +91,9 @@ Twitter
 https://twitter.com/sakai_1910
 Mail
 ss211.sabcabc12312395.18@gmail.com
+
+## 立ち上げ方法
+```bash
+docker-compose run --rm web bundle exec rails assets:precompile
+docker-compose run --rm --service-ports web
+```
