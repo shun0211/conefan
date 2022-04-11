@@ -12,7 +12,10 @@
 
 ActiveRecord::Schema.define(version: 2021_01_02_073814) do
 
-  create_table "cards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "cards", force: :cascade do |t|
     t.bigint "user_id"
     t.string "customer_id", null: false
     t.string "card_id", default: "", null: false
@@ -21,7 +24,7 @@ ActiveRecord::Schema.define(version: 2021_01_02_073814) do
     t.index ["user_id"], name: "index_cards_on_user_id"
   end
 
-  create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "comments", force: :cascade do |t|
     t.string "content", null: false
     t.bigint "user_id"
     t.bigint "ticket_id"
@@ -31,7 +34,7 @@ ActiveRecord::Schema.define(version: 2021_01_02_073814) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table "entries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "entries", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "room_id"
     t.datetime "created_at", precision: 6, null: false
@@ -40,7 +43,7 @@ ActiveRecord::Schema.define(version: 2021_01_02_073814) do
     t.index ["user_id"], name: "index_entries_on_user_id"
   end
 
-  create_table "likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "likes", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "ticket_id"
     t.datetime "created_at", precision: 6, null: false
@@ -50,7 +53,7 @@ ActiveRecord::Schema.define(version: 2021_01_02_073814) do
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
-  create_table "messages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "messages", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "room_id"
     t.text "content"
@@ -61,7 +64,7 @@ ActiveRecord::Schema.define(version: 2021_01_02_073814) do
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
-  create_table "notifications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "notifications", force: :cascade do |t|
     t.integer "visitor_id", null: false
     t.integer "visited_id", null: false
     t.integer "ticket_id"
@@ -74,7 +77,7 @@ ActiveRecord::Schema.define(version: 2021_01_02_073814) do
     t.index ["message_id"], name: "index_notifications_on_message_id"
   end
 
-  create_table "relationships", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "relationships", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "follow_id"
     t.datetime "created_at", precision: 6, null: false
@@ -84,7 +87,7 @@ ActiveRecord::Schema.define(version: 2021_01_02_073814) do
     t.index ["user_id"], name: "index_relationships_on_user_id"
   end
 
-  create_table "requests", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "requests", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "ticket_id"
     t.datetime "created_at", precision: 6, null: false
@@ -93,12 +96,12 @@ ActiveRecord::Schema.define(version: 2021_01_02_073814) do
     t.index ["user_id"], name: "index_requests_on_user_id"
   end
 
-  create_table "rooms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "rooms", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "tickets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "tickets", force: :cascade do |t|
     t.string "sheet_type"
     t.integer "price", null: false
     t.integer "shipping", null: false
@@ -117,7 +120,7 @@ ActiveRecord::Schema.define(version: 2021_01_02_073814) do
     t.index ["seller_id"], name: "index_tickets_on_seller_id"
   end
 
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "nickname", default: "", null: false
